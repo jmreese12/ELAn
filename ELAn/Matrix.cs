@@ -6,29 +6,52 @@ using System.Threading.Tasks;
 
 namespace ELAn
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Matrix
     {
-        private int[,] matrix;
+
+        private int[] matrix;
 
         private int width;
         private int height;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public Matrix(int width, int height)
         {
-            this.matrix = new int[width,height];
+            //uses single dimensional array to stride the array
+            this.matrix = new int[width * height];
 
+            //stores width and height of a matrix
             this.width = width;
             this.height = height;
         }
 
-        public Matrix(int[,] matrix)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        public Matrix(int width, int height, int[] values)
         {
-            this.matrix = matrix;
+            this.width = width;
+            this.height = height;
 
-            this.width = matrix.GetLength(0);
-            this.height = matrix.GetLength(1);
+            matrix = new int[height * width];
+
+            for (int i = 0; i < values.Length - 1; i++)
+            {
+                matrix[i] = values[i];
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsSquare
         {
             get
@@ -37,6 +60,9 @@ namespace ELAn
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int Width
         {
             get
@@ -45,6 +71,9 @@ namespace ELAn
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int Height
         {
             get
@@ -53,62 +82,110 @@ namespace ELAn
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="m1"></param>
+        /// <param name="m2"></param>
+        /// <returns></returns>
         public static Matrix Add(Matrix m1, Matrix m2)
         {
-            if ((m1.width == m2.width) && (m1.height == m2.height))
-            {
-                for (int x = 0; x < m1.width; x++)
-                {
-                    for (int y = 0; y < m1.height; y++)
-                    {
-                        m1.matrix[x,y] += m2.matrix[x,y];
-                    }
-                }
 
-                return m1;
+            Matrix m = new Matrix(m1.width, m1.height);
+
+            for (int i = 0; i < m1.width; i++)
+            {
+
             }
 
             return null;
+
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private int GetPosition(int x, int y)
+        {
+            if (y == 0)
+            {
+                return (x * width) + y;
+            }
+            else
+            {
+                return (x * width) + (y + 1);
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public int this[int x, int y]
+        {
+            get
+            {
+                return matrix[GetPosition(x, y)];
+            }
+
+            set
+            {
+                matrix[GetPosition(x, y)] = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             if (obj is Matrix)
             {
                 Matrix m = (Matrix)obj;
-
-                m.matrix.
             }
 
             return false;
         }
 
-        public int this[int x, int y]
-        {
-            get
-            {
-                return this[x, y];
-            }
-            set
-            {
-                this[x, y] = value;
-            }
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        //public static implicit operator Matrix(int width, int height,int[] matrix)
+        //{
+        //    return new Matrix();
+        //}
 
-        public static implicit operator Matrix(int[,] matrix)
-        {
-            return new Matrix(matrix);
-        }
-
-        public static implicit operator int[,](Matrix matrix)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
+        public static implicit operator int[](Matrix matrix)
         {
             return matrix;
         }
 
-        public static Matrix operator +(Matrix m1, Matrix m2)
-        {
-            return Matrix.Add(m1, m2);  
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="m1"></param>
+        /// <param name="m2"></param>
+        /// <returns></returns>
+        //public static Matrix operator +(Matrix m1, Matrix m2)
+        //{
+        //return Matrix.Add(m1, m2);  
+        //}
 
     }
 }
+
