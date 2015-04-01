@@ -12,20 +12,20 @@ namespace ETest
         //testing this jawn
         static void Main(string[] args)
         {
-            Matrix m = new Matrix(2, 2);
-            m[0, 0] = 1;
-            m[1, 0] = 2;
-            m[0, 1] = 3;
-            m[1, 1] = 4;
-            Matrix m2 = new Matrix(2, 3);
-            m[0, 0] = 1;
-            m[1, 0] = 2;
-            m[0, 1] = 3;
-            m[1, 1] = 4;
+            Matrix m1 = new int[,] 
+            { 
+             { 0, 1 },
+             { 2, 3 } 
+            };
 
+            Matrix m2 = new int[,] 
+            { 
+             { 0, 3 },
+             { 4, 5 } 
+            };
 
-            m = m - m2;
-            Console.WriteLine(m);
+            m1.GetRow(1);
+            Console.WriteLine((m1+m2));
             Console.ReadKey();
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ELAn
@@ -42,7 +43,7 @@ namespace ELAn
 
             matrix = new int[height * width];
 
-            for (int i = 0; i < values.Length - 1; i++)
+            for (int i = 0; i < values.Length; i++)
             {
                 matrix[i] = values[i];
             }
@@ -130,12 +131,58 @@ namespace ELAn
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="rowNumber"></param>
+        /// <returns></returns>
+        public int[] GetRow(int rowNumber)
+        {
+            int[] values = new int[width];
+
+            for (int i = 0; i < width;i++ )
+            {
+                values[i] = matrix[GetPosition(rowNumber, i)];
+            }
+
+            return values;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="colNumber"></param>
+        /// <returns></returns>
+        public int[] GetColumn(int colNumber)
+        {
+            int[] values = new int[height];
+
+            for (int i = 0; i < height; i++)
+            {
+                values[i] = matrix[GetPosition(i,colNumber)];
+            }
+
+            return values;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="m1"></param>
         /// <param name="m2"></param>
         /// <returns></returns>
         public static Matrix Multiply(Matrix m1, Matrix m2)
         {
-            return m1;
+            if(m1.width != m2.height)
+            {
+                throw new MatrixMismatchException("The first operand must have equal width to the second operands height.");
+            }
+
+            Matrix newMatrix = new Matrix(m1.height, m2.width);
+
+            //for (int x = 0; x < m1.width;x+=m1.width )
+            //{
+            //    for(int i = 0; i < )
+            //}
+
+                return m1;
         }
 
         /// <summary>
@@ -149,6 +196,16 @@ namespace ELAn
             return (x * width) + y;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Size
+        {
+            get
+            {
+                return matrix.Length;
+            }
+        }
 
         /// <summary>
         /// 
@@ -179,9 +236,22 @@ namespace ELAn
             if (obj is Matrix)
             {
                 Matrix m = (Matrix)obj;
+
+               if(m.Size != this.Size)
+               {
+                   return false;
+               }
+
+                for(int i = 0; i < this.Size;i++)
+                {
+                    if(this.matrix[i] != m.matrix[i])
+                    {
+                        return false;
+                    }
+                }
             }
 
-            return false;
+            return true;
         }
 
         public static Matrix Transpose(Matrix m)
@@ -205,10 +275,22 @@ namespace ELAn
         /// </summary>
         /// <param name="matrix"></param>
         /// <returns></returns>
-        //public static implicit operator Matrix(int width, int height,int[] matrix)
-        //{
-        //    return new Matrix();
-        //}
+        public static implicit operator Matrix(int[,] matrix)
+        {
+            int width = matrix.GetLength(0);
+            int height = matrix.GetLength(1);
+
+            int[] values = new int[width * height];
+
+            for (int x = 0; x < width;x++ )
+            {
+                for(int y = 0; y < height;y++)
+                {
+                    values[(x * width) + y] = matrix[x, y];
+                }
+            }
+            return new Matrix(height, width, values);
+        }
 
         /// <summary>
         /// 
@@ -259,13 +341,10 @@ namespace ELAn
 
             for (int i = 0; i < matrix.Length;i++ )
             {
-                matrixPrint += matrix[i] + " ";
-                if(i % (width-1) == 0 && i > 0)
-                {
-                    matrixPrint += "\n";
-                }
+                matrixPrint += matrix[i];
             }
-                return matrixPrint;
+
+            return Regex.Replace(matrixPrint, ".{" + width + "}", "$0\n");
         }
 
 
