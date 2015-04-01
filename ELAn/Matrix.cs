@@ -96,6 +96,10 @@ namespace ELAn
                     m1.matrix[i] += m2.matrix[i];
                 }
             }
+            else
+            {
+                throw new MatrixMismatchException("Both operands must be of equal size.");
+            }
 
             return m1;
         }
@@ -114,6 +118,10 @@ namespace ELAn
                 {
                     m1.matrix[i] -= m2.matrix[i];
                 }
+            }
+            else
+            {
+                throw new MatrixMismatchException("Both operands must be of equal size.");
             }
 
             return m1;
@@ -252,7 +260,7 @@ namespace ELAn
             for (int i = 0; i < matrix.Length;i++ )
             {
                 matrixPrint += matrix[i] + " ";
-                if(i % width == 0)
+                if(i % (width-1) == 0 && i > 0)
                 {
                     matrixPrint += "\n";
                 }
