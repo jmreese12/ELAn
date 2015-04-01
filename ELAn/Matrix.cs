@@ -29,6 +29,14 @@ namespace ELAn
             this.height = matrix.GetLength(1);
         }
 
+        public bool IsSquare
+        {
+            get
+            {
+                return width == height;
+            }
+        }
+
         public int Width
         {
             get
