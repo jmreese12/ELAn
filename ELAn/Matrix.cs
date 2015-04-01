@@ -89,9 +89,9 @@ namespace ELAn
         /// <returns></returns>
         public static Matrix Add(Matrix m1, Matrix m2)
         {
-            if((m1.height == m2.height) && (m1.width == m2.width))
+            if ((m1.height == m2.height) && (m1.width == m2.width))
             {
-                for (int i = 0; i < (m1.width*m1.height); i++)
+                for (int i = 0; i < (m1.width * m1.height); i++)
                 {
                     m1.matrix[i] += m2.matrix[i];
                 }
@@ -138,14 +138,7 @@ namespace ELAn
         /// <returns></returns>
         private int GetPosition(int x, int y)
         {
-            if (y == 0)
-            {
-                return (x * width) + y;
-            }
-            else
-            {
-                return (x * width) + (y + 1);
-            }
+            return (x * width) + y;
         }
 
 
@@ -182,6 +175,22 @@ namespace ELAn
 
             return false;
         }
+
+        public static Matrix Transpose(Matrix m)
+        {
+            Matrix mTrans = new Matrix(m.width, m.height);
+
+            for (int x = 0; x < m.width; x++)
+            {
+                for (int y = 0; y < m.height; y++)
+                {
+                    mTrans[x, y] = m[y, x];
+                }
+            }
+
+            return mTrans;
+        }
+
 
         /// <summary>
         /// 
@@ -235,6 +244,22 @@ namespace ELAn
         {
             return Matrix.Multiply(m1, m2);
         }
+
+        public override string ToString()
+        {
+            string matrixPrint = "";
+
+            for (int i = 0; i < matrix.Length;i++ )
+            {
+                matrixPrint += matrix[i] + " ";
+                if(i % width == 0)
+                {
+                    matrixPrint += "\n";
+                }
+            }
+                return matrixPrint;
+        }
+
 
     }
 }

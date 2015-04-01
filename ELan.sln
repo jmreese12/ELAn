@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E", "WindowsFormsApplication1\E.csproj", "{B2662996-8B91-4100-8DFA-AF0FF098B375}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELAnTest", "ELAnTest\ELAnTest.csproj", "{637FE328-D583-4398-BA76-83E01BEBB70F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELAn", "ELAn\ELAn.csproj", "{07ADB590-8956-45E6-8847-384A367A657C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ETest", "ETest\ETest.csproj", "{1742484C-72DA-4463-9888-C0073CEDE524}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +41,12 @@ Global
 		{07ADB590-8956-45E6-8847-384A367A657C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07ADB590-8956-45E6-8847-384A367A657C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{07ADB590-8956-45E6-8847-384A367A657C}.Release|x86.ActiveCfg = Release|Any CPU
+		{1742484C-72DA-4463-9888-C0073CEDE524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1742484C-72DA-4463-9888-C0073CEDE524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1742484C-72DA-4463-9888-C0073CEDE524}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1742484C-72DA-4463-9888-C0073CEDE524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1742484C-72DA-4463-9888-C0073CEDE524}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1742484C-72DA-4463-9888-C0073CEDE524}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
