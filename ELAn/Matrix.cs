@@ -137,7 +137,7 @@ namespace ELAn
         {
             int[] values = new int[width];
 
-            for (int i = 0; i < width;i++ )
+            for (int i = 0; i < width; i++)
             {
                 values[i] = matrix[GetPosition(rowNumber, i)];
             }
@@ -156,7 +156,7 @@ namespace ELAn
 
             for (int i = 0; i < height; i++)
             {
-                values[i] = matrix[GetPosition(i,colNumber)];
+                values[i] = matrix[GetPosition(i, colNumber)];
             }
 
             return values;
@@ -170,19 +170,30 @@ namespace ELAn
         /// <returns></returns>
         public static Matrix Multiply(Matrix m1, Matrix m2)
         {
-            if(m1.width != m2.height)
+            if (m1.width != m2.height)
             {
                 throw new MatrixMismatchException("The first operand must have equal width to the second operands height.");
             }
 
             Matrix newMatrix = new Matrix(m1.height, m2.width);
 
-            //for (int x = 0; x < m1.width;x+=m1.width )
-            //{
-            //    for(int i = 0; i < )
-            //}
+            for (int row = 0; row < m1.height; row++)
+            {
+                for (int col = 0; col < m2.width; col++)
+                {
+                    int[] currentRow = m1.GetRow(row);
+                    int[] currentCol = m2.GetColumn(col);
+                    int value = 0;
 
-                return m1;
+                    for (int i = 0; i < currentRow.Length; i++)
+                    {
+                        value += currentRow[i] * currentCol[i];
+                    }
+
+                    newMatrix[row, col] = value;
+                }
+            }
+            return newMatrix;
         }
 
         /// <summary>
@@ -237,14 +248,14 @@ namespace ELAn
             {
                 Matrix m = (Matrix)obj;
 
-               if(m.Size != this.Size)
-               {
-                   return false;
-               }
-
-                for(int i = 0; i < this.Size;i++)
+                if (m.Size != this.Size)
                 {
-                    if(this.matrix[i] != m.matrix[i])
+                    return false;
+                }
+
+                for (int i = 0; i < this.Size; i++)
+                {
+                    if (this.matrix[i] != m.matrix[i])
                     {
                         return false;
                     }
@@ -258,12 +269,9 @@ namespace ELAn
         {
             Matrix mTrans = new Matrix(m.width, m.height);
 
-            for (int x = 0; x < m.width; x++)
+            for (int i = 0; i < m.height; i++)
             {
-                for (int y = 0; y < m.height; y++)
-                {
-                    mTrans[x, y] = m[y, x];
-                }
+
             }
 
             return mTrans;
@@ -282,9 +290,9 @@ namespace ELAn
 
             int[] values = new int[width * height];
 
-            for (int x = 0; x < width;x++ )
+            for (int x = 0; x < width; x++)
             {
-                for(int y = 0; y < height;y++)
+                for (int y = 0; y < height; y++)
                 {
                     values[(x * width) + y] = matrix[x, y];
                 }
@@ -339,7 +347,7 @@ namespace ELAn
         {
             string matrixPrint = "";
 
-            for (int i = 0; i < matrix.Length;i++ )
+            for (int i = 0; i < matrix.Length; i++)
             {
                 matrixPrint += matrix[i];
             }
