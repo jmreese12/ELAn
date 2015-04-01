@@ -9,9 +9,8 @@ namespace ELAn
     /// <summary>
     /// 
     /// </summary>
-    public class Matrix
+    public struct Matrix
     {
-
         private int[] matrix;
 
         private int width;
@@ -90,16 +89,45 @@ namespace ELAn
         /// <returns></returns>
         public static Matrix Add(Matrix m1, Matrix m2)
         {
-
-            Matrix m = new Matrix(m1.width, m1.height);
-
-            for (int i = 0; i < m1.width; i++)
+            if((m1.height == m2.height) && (m1.width == m2.width))
             {
-
+                for (int i = 0; i < (m1.width*m1.height); i++)
+                {
+                    m1.matrix[i] += m2.matrix[i];
+                }
             }
 
-            return null;
+            return m1;
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="m1"></param>
+        /// <param name="m2"></param>
+        /// <returns></returns>
+        public static Matrix Subtract(Matrix m1, Matrix m2)
+        {
+            if ((m1.height == m2.height) && (m1.width == m2.width))
+            {
+                for (int i = 0; i < (m1.width * m1.height); i++)
+                {
+                    m1.matrix[i] -= m2.matrix[i];
+                }
+            }
+
+            return m1;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="m1"></param>
+        /// <param name="m2"></param>
+        /// <returns></returns>
+        public static Matrix Multiply(Matrix m1, Matrix m2)
+        {
+            return m1;
         }
 
         /// <summary>
@@ -181,10 +209,32 @@ namespace ELAn
         /// <param name="m1"></param>
         /// <param name="m2"></param>
         /// <returns></returns>
-        //public static Matrix operator +(Matrix m1, Matrix m2)
-        //{
-        //return Matrix.Add(m1, m2);  
-        //}
+        public static Matrix operator +(Matrix m1, Matrix m2)
+        {
+            return Matrix.Add(m1, m2);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="m1"></param>
+        /// <param name="m2"></param>
+        /// <returns></returns>
+        public static Matrix operator -(Matrix m1, Matrix m2)
+        {
+            return Matrix.Subtract(m1, m2);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="m1"></param>
+        /// <param name="m2"></param>
+        /// <returns></returns>
+        public static Matrix operator *(Matrix m1, Matrix m2)
+        {
+            return Matrix.Multiply(m1, m2);
+        }
 
     }
 }
